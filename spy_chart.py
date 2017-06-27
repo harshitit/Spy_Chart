@@ -71,14 +71,14 @@ def addfriend(spy_s):
             if spy_age > 11 and spy_age < 51:
                 choice1=True
                 while choice1==True:
-                    spy_rate = float(raw_input("Enter Ratings out of 5:\n--> "))
-                    if spy_rate>-1 and spy_rate<5.1:
-                        spy_friend[spy_s]['friends'].update({spy_fri:{'Status': 'Online', 'Rating': spy_rate, 'Age': spy_age}})#this line add a new spy's friend in spy_friend dictionary
-                        print spy_friend[spy_s]['friends'].keys()
+                    spy_friend_rate = float(raw_input("Enter Ratings out of 5 and equal or greater than your rating:\n--> "))
+                    spy_rate=float(spy_details[spy_s]['Rating'])
+                    if spy_friend_rate==spy_rate and spy_friend_rate<5.1:
+                        spy_friend[spy_s]['friends'].update({spy_fri:{'Status': 'Online', 'Rating': spy_friend_rate, 'Age': spy_age}})#this line add a new spy's friend in spy_friend dictionary
                         choice1=False
                         choice2=False
                     else:
-                        print "Please Enter Ratings out of 5*"
+                        print "Ratings is not equal or greater than your rating*"
             else:
                 print "Age is not in Age limits*\nTry Again"
     else:
@@ -91,7 +91,7 @@ def encodemsg(spy_a):
     text=raw_input("Enter the secret message:\n--> ")
     Steganography.encode(path,output_path,text)#this line encrypt your secret message in image
     select_a_friend=raw_input("Enter the name of the Receiver\nFriends List: "+str(spy_friend[spy_a]['friends'].keys())+":\n-->")#this line print the spy's friend list and then you have to enter the name of your friend
-    spy_chat_history[spy_a]=str(spy_chat_history[spy_a])+str({'Sendto':select_a_friend,'Message':text,'Receivetime':str(datetime.today())})#here we add the send details to our spy_chat_history for future use/check
+    spy_chat_history[spy_a]=str(spy_chat_history[spy_a])+str({'Sendto':select_a_friend,'Message':text,'Sendtime':str(datetime.today())})#here we add the send details to our spy_chat_history for future use/check
     return
 #to read the message
 def readmsg(spy_ab):
